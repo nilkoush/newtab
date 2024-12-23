@@ -1,10 +1,15 @@
 'use client';
 
 import { useEditMode } from '@/contexts/edit-mode-context';
+import { useSettings } from '@/hooks/use-settings';
 import { IoLogoGithub } from 'react-icons/io5';
 import { LuPen, LuRotateCcw, LuX } from 'react-icons/lu';
 
 export default function Dashboard() {
+    const [backgroundImage, setBackgroundImage] = useSettings(
+        'background_image',
+        'https://unsplash.com/photos/5Qqkjn4PFPA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8aWNlbGFuZHxlbnwwfHx8fDE3MzQ5MzYxMzN8Mg&force=true&w=1920'
+    );
     const { isEditMode, enableEditMode, disableEditMode } = useEditMode();
 
     const clearSettings = () => {
@@ -37,6 +42,8 @@ export default function Dashboard() {
                         <input
                             className="flex w-96 px-4 text-[#b1b1bd] outline-none gap-2 rounded-md bg-[#38383d] shadow-sm"
                             type="text"
+                            value={backgroundImage}
+                            onChange={(e) => setBackgroundImage(e.target.value)}
                         />
                         <button
                             onClick={clearSettings}
